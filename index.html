@@ -783,7 +783,7 @@ document.getElementById('kevinrun-canvas').addEventListener('touchstart', e => {
 // ======================================================
 //  POON MILK TYCOON (DEMO)
 // ======================================================
-let poonState, poonInterval, poonAutoSaveInterval;
+let poonState, poonInterval, poonAutoSaveInterval, poonListenersReady = false;
 
 const POON_UNITS = [
   {name:'Backyard Cow',baseCost:8,pms:0.5,mult:1.20},
@@ -985,60 +985,31 @@ function drawPoonFarm() {
   };
   drawCloud(20, 30, 5);
   drawCloud(canvas.width - 80, 50, 4);
-
-  // Barn (red with dark roof)
-  const barnX = canvas.width * 0.75;
-  const barnY = canvas.height * 0.45;
-  ctx.fillStyle = '#cc0000';
-  ctx.fillRect(barnX, barnY, 60, 50);
-  ctx.fillStyle = '#330000';
-  ctx.fillRect(barnX - 5, barnY - 15, 70, 15);
-  ctx.fillStyle = '#ffcc00';
-  ctx.fillRect(barnX + 20, barnY + 15, 8, 8);
-
-  // Cows (black and white blocky)
-  const drawCow = (x, y) => {
-    // Body (black)
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(x, y, 20, 12);
-    // Head (white)
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(x + 16, y - 2, 8, 10);
-    // Spots
-    ctx.fillStyle = '#000000';
-    ctx.fillRect(x + 4, y + 2, 4, 4);
-    ctx.fillRect(x + 12, y + 2, 4, 4);
-  };
-  drawCow(30, canvas.height * 0.55);
-  drawCow(120, canvas.height * 0.5);
-  drawCow(canvas.width * 0.35, canvas.height * 0.52);
 }
 
 function initPoonMilkListeners() {
-  const unitsContainer = document.getElementById('poon-units');
-  const upgradesContainer = document.getElementById('poon-upgrades');
+  if (poonListenersReady) return;
 
-  if (unitsContainer && !unitsContainer.hasListener) {
-    unitsContainer.addEventListener('click', (e) => {
-      const card = e.target.closest('[data-unit-idx]');
-      if (card) {
-        const idx = parseInt(card.getAttribute('data-unit-idx'));
-        buyUnit(idx);
-      }
-    });
-    unitsContainer.hasListener = true;
-  }
+  const poonBody = document.querySelector('.poon-body');
+  if (!poonBody) return;
 
-  if (upgradesContainer && !upgradesContainer.hasListener) {
-    upgradesContainer.addEventListener('click', (e) => {
-      const card = e.target.closest('[data-upgrade-idx]');
-      if (card) {
-        const idx = parseInt(card.getAttribute('data-upgrade-idx'));
-        buyPoonUpgrade(idx);
-      }
-    });
-    upgradesContainer.hasListener = true;
-  }
+  poonBody.addEventListener('click', (e) => {
+    const unitCard = e.target.closest('[data-unit-idx]');
+    if (unitCard) {
+      const idx = parseInt(unitCard.getAttribute('data-unit-idx'));
+      buyUnit(idx);
+      return;
+    }
+
+    const upgradeCard = e.target.closest('[data-upgrade-idx]');
+    if (upgradeCard) {
+      const idx = parseInt(upgradeCard.getAttribute('data-upgrade-idx'));
+      buyPoonUpgrade(idx);
+      return;
+    }
+  });
+
+  poonListenersReady = true;
 }
 
 function initPoonMilk() {
