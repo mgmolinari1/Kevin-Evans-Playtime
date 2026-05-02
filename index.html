@@ -81,12 +81,16 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .poon-unit-card.locked{opacity:.5;cursor:not-allowed;}
 .poon-upgrades-title{font-size:12px;color:#ffff00;margin-top:16px;margin-bottom:8px;text-shadow:2px 2px 0 #000;}
 .poon-upgrades{width:100%;display:flex;flex-direction:column;gap:8px;}
-.poon-upgrade-card{background:#3a2a1a;border:2px solid #ff1493;padding:8px;display:flex;flex-direction:column;cursor:pointer;box-shadow:2px 2px 0 #2a1a0a;}
-.poon-upgrade-card:hover:not(.owned){background:#4a3a2a;}
-.poon-upgrade-card.owned{opacity:.6;cursor:not-allowed;}
+.poon-upgrade-card{background:#3a2a1a;border:2px solid #ff1493;padding:8px;display:flex;flex-direction:column;box-shadow:2px 2px 0 #2a1a0a;}
+.poon-upgrade-card.owned{opacity:.6;}
 .poon-upgrade-name{font-size:9px;color:#ff1493;text-shadow:1px 1px 0 #000;font-weight:bold;}
 .poon-upgrade-desc{font-size:7px;color:#8fd68f;margin:2px 0;text-shadow:1px 1px 0 #000;}
 .poon-upgrade-cost{font-size:9px;color:#ff1493;text-shadow:1px 1px 0 #000;margin-top:4px;}
+.poon-upgrade-footer{display:flex;justify-content:space-between;align-items:center;margin-top:6px;gap:4px;}
+.poon-buy-btn{background:linear-gradient(135deg,#ff1493,#ff69b4);border:2px solid #8b7355;padding:3px 6px;font-family:'Press Start 2P',cursive;font-size:7px;color:#fff;cursor:pointer;text-shadow:1px 1px 0 #000;box-shadow:2px 2px 0 #2a1a0a;transition:all .1s;user-select:none;flex:1;}
+.poon-buy-btn:hover:not(:disabled){background:linear-gradient(135deg,#ff69b4,#ff1493);transform:translate(-1px,-1px);box-shadow:3px 3px 0 #2a1a0a;}
+.poon-buy-btn:active:not(:disabled){transform:translate(1px,1px);box-shadow:1px 1px 0 #2a1a0a;}
+.poon-buy-btn:disabled{opacity:.5;cursor:not-allowed;}
 .poon-unit-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .poon-unit-name{font-size:9px;color:#ffff00;text-shadow:1px 1px 0 #000;}
 .poon-unit-owned{font-size:8px;color:#fff;text-shadow:1px 1px 0 #000;}
@@ -945,7 +949,10 @@ function renderPoonUpgrades() {
         <div class="poon-upgrade-name">${upgrade.name}</div>
       </div>
       <div class="poon-upgrade-desc">"${upgrade.desc}"</div>
-      <div class="poon-upgrade-cost">${owned ? 'OWNED' : 'Cost: ' + fmtMoney(upgrade.cost)}</div>
+      <div class="poon-upgrade-footer">
+        <div class="poon-upgrade-cost">${owned ? 'OWNED' : fmtMoney(upgrade.cost)}</div>
+        <button class="poon-buy-btn" data-buy-upgrade="${idx}" ${owned ? 'disabled' : ''}>${owned ? 'OWNED' : 'BUY'}</button>
+      </div>
     `;
     list.appendChild(div);
   });
@@ -994,17 +1001,21 @@ function initPoonMilkListeners() {
   if (!poonBody) return;
 
   poonBody.addEventListener('click', (e) => {
+    // Handle unit card clicks
     const unitCard = e.target.closest('[data-unit-idx]');
-    if (unitCard) {
+    if (unitCard && !e.target.closest('.poon-buy-btn')) {
       const idx = parseInt(unitCard.getAttribute('data-unit-idx'));
       buyUnit(idx);
       return;
     }
 
-    const upgradeCard = e.target.closest('[data-upgrade-idx]');
-    if (upgradeCard) {
-      const idx = parseInt(upgradeCard.getAttribute('data-upgrade-idx'));
-      buyPoonUpgrade(idx);
+    // Handle upgrade BUY button clicks
+    const buyBtn = e.target.closest('.poon-buy-btn');
+    if (buyBtn) {
+      const idx = parseInt(buyBtn.getAttribute('data-buy-upgrade'));
+      if (idx !== null && idx !== undefined) {
+        buyPoonUpgrade(idx);
+      }
       return;
     }
   });
