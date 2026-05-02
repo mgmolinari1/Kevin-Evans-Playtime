@@ -64,7 +64,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #kevinrun-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;background:#3a5a1a;border:4px solid #8b7355;padding:16px;box-shadow:inset 0 0 0 2px #d4a574,4px 4px 0 #2a1a0a;}
 #kevinrun-newhiscore{font-size:12px;color:#ffff00;margin:8px 0;text-shadow:2px 2px 0 #ff6600;display:none;}
 
-/* ---- POON MILK TYCOON ---- */
+/* ---- POON MILK TYCOON (DEMO) ---- */
 #poonmilk{background:linear-gradient(135deg,#4a3a1a,#2a1a0a);}
 .poon-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:12px;overflow-y:auto;width:100%;max-width:500px;margin:0 auto;}
 .poon-money{text-align:center;margin-bottom:16px;}
@@ -78,6 +78,14 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 .poon-unit-card{background:#3a2a1a;border:2px solid #8b7355;padding:8px;display:flex;flex-direction:column;cursor:pointer;box-shadow:2px 2px 0 #2a1a0a;}
 .poon-unit-card:hover:not(.locked){background:#4a3a2a;}
 .poon-unit-card.locked{opacity:.5;cursor:not-allowed;}
+.poon-upgrades-title{font-size:12px;color:#ffff00;margin-top:16px;margin-bottom:8px;text-shadow:2px 2px 0 #000;}
+.poon-upgrades{width:100%;display:flex;flex-direction:column;gap:8px;}
+.poon-upgrade-card{background:#3a2a1a;border:2px solid #ff1493;padding:8px;display:flex;flex-direction:column;cursor:pointer;box-shadow:2px 2px 0 #2a1a0a;}
+.poon-upgrade-card:hover:not(.owned){background:#4a3a2a;}
+.poon-upgrade-card.owned{opacity:.6;cursor:not-allowed;}
+.poon-upgrade-name{font-size:9px;color:#ff1493;text-shadow:1px 1px 0 #000;font-weight:bold;}
+.poon-upgrade-desc{font-size:7px;color:#8fd68f;margin:2px 0;text-shadow:1px 1px 0 #000;}
+.poon-upgrade-cost{font-size:9px;color:#ff1493;text-shadow:1px 1px 0 #000;margin-top:4px;}
 .poon-unit-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .poon-unit-name{font-size:9px;color:#ffff00;text-shadow:1px 1px 0 #000;}
 .poon-unit-owned{font-size:8px;color:#fff;text-shadow:1px 1px 0 #000;}
@@ -176,7 +184,7 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
     </div>
     <div class="game-card" onclick="showScreen('poonmilk');initPoonMilk();">
       <div class="game-card-icon">🥛</div>
-      <div class="game-card-title">POON MILK TYCOON</div>
+      <div class="game-card-title">POON MILK TYCOON (DEMO)</div>
       <div class="game-card-desc">Start building your Poon Milk Empire!</div>
     </div>
     <div class="game-card" onclick="showScreen('kevinrun');startKevinRun();">
@@ -221,11 +229,11 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   </div>
 </div>
 
-<!-- ======== POON MILK TYCOON ======== -->
+<!-- ======== POON MILK TYCOON (DEMO) ======== -->
 <div id="poonmilk" class="screen game-screen">
   <div class="game-topbar">
     <button class="back-btn" onclick="goHome();">BACK</button>
-    <span class="game-topbar-title">POON MILK TYCOON</span>
+    <span class="game-topbar-title">POON MILK TYCOON (DEMO)</span>
   </div>
   <div class="poon-body">
     <div class="poon-save-status" id="poon-save-status"></div>
@@ -234,8 +242,11 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <div class="poon-milk-display" id="poon-pms"></div>
     </div>
     <button class="poon-tap-btn" onclick="produceMilk();">PRODUCE MILK</button>
+    <div class="poon-milk-display" id="poon-tap-value">💰 TAP VALUE: $0.25</div>
     <div class="poon-units-title">UNITS</div>
     <div class="poon-units" id="poon-units"></div>
+    <div class="poon-upgrades-title">CLICK POWER</div>
+    <div class="poon-upgrades" id="poon-upgrades"></div>
     <button class="poon-reset" onclick="resetPoonMilk();" title="Reset game progress">RESET</button>
   </div>
 </div>
@@ -757,7 +768,7 @@ document.getElementById('kevinrun-canvas').addEventListener('touchstart', e => {
 });
 
 // ======================================================
-//  POON MILK TYCOON
+//  POON MILK TYCOON (DEMO)
 // ======================================================
 let poonState, poonInterval, poonAutoSaveInterval;
 
@@ -766,11 +777,17 @@ const POON_UNITS = [
   {name:'Small Dairy Farm',baseCost:80,pms:4,mult:1.20}
 ];
 
+const POON_UPGRADES = [
+  {name:'Golden Udder',cost:50,desc:'Twice the squeeze, twice the milk.',tapMult:2},
+  {name:'Diamond Hooves',cost:500,desc:'Pure luxury. Pure milk.',tapMult:2}
+];
+
 function savePoonProgress() {
   if (!poonState) return;
   localStorage.setItem('poon_save', JSON.stringify({
     money: poonState.money,
-    owned: poonState.owned
+    owned: poonState.owned,
+    upgrades: poonState.upgrades
   }));
   showPoonSaveStatus();
 }
@@ -789,7 +806,8 @@ function loadPoonProgress() {
       const data = JSON.parse(saved);
       return {
         money: data.money || 0,
-        owned: data.owned || {}
+        owned: data.owned || {},
+        upgrades: data.upgrades || {}
       };
     } catch(e) {
       return null;
@@ -834,6 +852,9 @@ function calculateTotalPMS() {
 function updatePoonDisplay() {
   document.getElementById('poon-money').textContent = fmtMoney(poonState.money);
 
+  const tapValue = calculateTapValue();
+  document.getElementById('poon-tap-value').textContent = `💰 TAP VALUE: ${fmtMoney(tapValue)}`;
+
   const pms = calculateTotalPMS();
   const pmsEl = document.getElementById('poon-pms');
   if (pms > 0) {
@@ -843,6 +864,7 @@ function updatePoonDisplay() {
   }
 
   renderPoonUnits();
+  renderPoonUpgrades();
 }
 
 function renderPoonUnits() {
@@ -878,8 +900,47 @@ function buyUnit(idx) {
   savePoonProgress();
 }
 
+function calculateTapValue() {
+  let tapValue = 0.25;
+  if (poonState.upgrades[0]) tapValue *= 2;
+  if (poonState.upgrades[1]) tapValue *= 2;
+  return tapValue;
+}
+
+function buyPoonUpgrade(idx) {
+  if (poonState.upgrades[idx]) return;
+  const cost = POON_UPGRADES[idx].cost;
+  if (poonState.money < cost) return;
+  poonState.money -= cost;
+  poonState.upgrades[idx] = true;
+  updatePoonDisplay();
+  savePoonProgress();
+}
+
+function renderPoonUpgrades() {
+  const list = document.getElementById('poon-upgrades');
+  list.innerHTML = '';
+  POON_UPGRADES.forEach((upgrade, idx) => {
+    const owned = poonState.upgrades[idx];
+    const canAfford = poonState.money >= upgrade.cost && !owned;
+
+    const div = document.createElement('div');
+    div.className = 'poon-upgrade-card' + (owned ? ' owned' : '');
+    div.innerHTML = `
+      <div class="poon-unit-header">
+        <div class="poon-upgrade-name">${upgrade.name}</div>
+      </div>
+      <div class="poon-upgrade-desc">"${upgrade.desc}"</div>
+      <div class="poon-upgrade-cost">${owned ? 'OWNED' : 'Cost: ' + fmtMoney(upgrade.cost)}</div>
+    `;
+    div.onclick = () => buyPoonUpgrade(idx);
+    list.appendChild(div);
+  });
+}
+
 function produceMilk() {
-  poonState.money += 0.25;
+  const tapValue = calculateTapValue();
+  poonState.money += tapValue;
   updatePoonDisplay();
   savePoonProgress();
 }
@@ -891,7 +952,7 @@ function initPoonMilk() {
   if (saved) {
     poonState = saved;
   } else {
-    poonState = {money:0,owned:{}};
+    poonState = {money:0,owned:{},upgrades:{}};
   }
 
   updatePoonDisplay();
