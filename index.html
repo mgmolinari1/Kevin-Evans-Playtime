@@ -64,28 +64,28 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
 #kevinrun-overlay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;background:#3a5a1a;border:4px solid #8b7355;padding:16px;box-shadow:inset 0 0 0 2px #d4a574,4px 4px 0 #2a1a0a;}
 #kevinrun-newhiscore{font-size:12px;color:#ffff00;margin:8px 0;text-shadow:2px 2px 0 #ff6600;display:none;}
 
-/* ---- ALBUM CLICKER ---- */
-#albumclicker{background:linear-gradient(135deg,#4a3a1a,#2a1a0a);}
-.clicker-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:12px;overflow-y:auto;width:100%;max-width:500px;margin:0 auto;}
-.beat-display{text-align:center;margin-bottom:12px;}
-.beat-count{font-size:16px;color:#ffff00;text-shadow:2px 2px 0 #000;}
-.beat-per-sec{font-size:10px;color:#8fd68f;text-shadow:1px 1px 0 #000;}
-.click-zone{display:flex;flex-direction:column;align-items:center;cursor:pointer;margin:8px 0;user-select:none;-webkit-tap-highlight-color:transparent;}
-.click-zone:active .clicker-face{transform:scale(0.92);}
-.clicker-face{width:80px;height:80px;border:3px solid #8b7355;overflow:hidden;box-shadow:2px 2px 0 #2a1a0a,inset 0 0 0 2px #d4a574;transition:transform .08s;background:#c8a87c;image-rendering:pixelated;}
-.clicker-face img{width:100%;height:100%;object-fit:cover;}
-.click-hint{font-size:7px;color:#aaa;margin-top:4px;text-shadow:1px 1px 0 #000;}
-.milestone-banner{background:#5a3a1a;border:3px solid #8b7355;padding:8px 12px;font-size:10px;text-align:center;margin-bottom:8px;display:none;animation:slidein .3s;color:#ffff00;box-shadow:2px 2px 0 #2a1a0a;text-shadow:1px 1px 0 #000;}
-.save-status{font-size:8px;color:#8fd68f;text-align:center;margin-bottom:8px;text-shadow:1px 1px 0 #000;min-height:12px;}
-@keyframes slidein{from{opacity:0;transform:translateY(-10px);}to{opacity:1;transform:translateY(0);}}
-.upgrades-title{font-size:12px;align-self:flex-start;margin-bottom:8px;color:#ffff00;text-shadow:2px 2px 0 #000;}
-.upgrade-list{width:100%;display:flex;flex-direction:column;gap:8px;}
-.upgrade-item{background:#3a2a1a;border:2px solid #8b7355;padding:8px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;box-shadow:2px 2px 0 #2a1a0a;}
-.upgrade-item:hover:not(.locked){background:#4a3a2a;}
-.upgrade-item.locked{opacity:.5;cursor:not-allowed;}
-.upgrade-name{font-size:9px;color:#ffff00;text-shadow:1px 1px 0 #000;}
-.upgrade-info{font-size:7px;color:#8fd68f;margin-top:2px;text-shadow:1px 1px 0 #000;}
-.upgrade-cost{font-size:9px;color:#ffff99;text-shadow:1px 1px 0 #000;}
+/* ---- POON MILK TYCOON ---- */
+#poonmilk{background:linear-gradient(135deg,#4a3a1a,#2a1a0a);}
+.poon-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:12px;overflow-y:auto;width:100%;max-width:500px;margin:0 auto;}
+.poon-money{text-align:center;margin-bottom:16px;}
+.poon-money-pill{background:linear-gradient(135deg,#ff1493,#ff69b4);border:3px solid #8b7355;border-radius:8px;padding:8px 16px;font-size:14px;color:#fff;text-shadow:2px 2px 0 #000;box-shadow:4px 4px 0 #2a1a0a;font-weight:bold;}
+.poon-milk-display{text-align:center;margin-top:12px;font-size:10px;color:#fff;text-shadow:1px 1px 0 #000;}
+.poon-tap-btn{background:linear-gradient(135deg,#ff1493,#ff69b4);border:4px solid #8b7355;border-radius:8px;padding:16px 20px;font-family:'Press Start 2P',cursive;font-size:14px;color:#fff;cursor:pointer;text-shadow:2px 2px 0 #000;box-shadow:6px 6px 0 #2a1a0a;margin:12px 0;transition:all .1s;user-select:none;touch-action:manipulation;}
+.poon-tap-btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #2a1a0a;}
+.poon-auto{text-align:center;font-size:9px;color:#fff;margin:8px 0;text-shadow:1px 1px 0 #000;}
+.poon-units-title{font-size:12px;color:#ffff00;margin-top:16px;margin-bottom:8px;text-shadow:2px 2px 0 #000;}
+.poon-units{width:100%;display:flex;flex-direction:column;gap:8px;}
+.poon-unit-card{background:#3a2a1a;border:2px solid #8b7355;padding:8px;display:flex;flex-direction:column;cursor:pointer;box-shadow:2px 2px 0 #2a1a0a;}
+.poon-unit-card:hover:not(.locked){background:#4a3a2a;}
+.poon-unit-card.locked{opacity:.5;cursor:not-allowed;}
+.poon-unit-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.poon-unit-name{font-size:9px;color:#ffff00;text-shadow:1px 1px 0 #000;}
+.poon-unit-owned{font-size:8px;color:#fff;text-shadow:1px 1px 0 #000;}
+.poon-unit-info{font-size:7px;color:#8fd68f;margin:2px 0;text-shadow:1px 1px 0 #000;}
+.poon-unit-cost{font-size:9px;color:#ff1493;text-shadow:1px 1px 0 #000;margin-top:4px;}
+.poon-save-status{font-size:8px;color:#8fd68f;text-align:center;margin-bottom:8px;text-shadow:1px 1px 0 #000;min-height:12px;}
+.poon-reset{font-family:'Press Start 2P',cursive;font-size:7px;cursor:pointer;background:#5a3a1a;border:2px solid #8b7355;padding:3px 6px;box-shadow:1px 1px 0 #2a1a0a;color:#ffff99;text-shadow:1px 1px 0 #000;margin-top:12px;}
+.poon-reset:hover{background:#6a4a2a;}
 
 
 .bottom-controls{position:fixed;bottom:10px;right:10px;display:flex;gap:6px;z-index:1000;}
@@ -116,11 +116,11 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   #kevinrun-overlay{width:90%;max-width:280px;}
   #kevinrun-jump{display:flex;}
 
-  .clicker-body{padding:12px;max-width:100%;}
-  .clicker-face{width:100px;height:100px;}
-  .upgrade-item{padding:10px;font-size:8px;}
-  .upgrade-name{font-size:10px;}
-  .upgrade-cost{font-size:10px;}
+  .poon-body{padding:12px;max-width:100%;}
+  .poon-tap-btn{font-size:12px;padding:12px 16px;}
+  .poon-unit-card{padding:10px;font-size:8px;}
+  .poon-unit-name{font-size:10px;}
+  .poon-unit-cost{font-size:10px;}
 
   .hud-header{flex-direction:column;gap:8px;}
   .hud-text{font-size:9px;}
@@ -147,8 +147,8 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   #kevjump-overlay,#kevinrun-overlay{width:95%;}
   .play-btn{padding:6px 10px;font-size:8px;}
 
-  .beat-count{font-size:14px;}
-  .upgrade-item{padding:8px;flex-direction:column;align-items:flex-start;}
+  .poon-money-pill{font-size:12px;}
+  .poon-unit-card{padding:8px;flex-direction:column;align-items:flex-start;}
 }
 </style>
 </head>
@@ -174,10 +174,10 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
       <div class="game-card-desc">jump high fuh</div>
       <div class="game-card-score">HI: <span id="home-kj-score">0</span></div>
     </div>
-    <div class="game-card" onclick="showScreen('albumclicker');initClicker();">
-      <div class="game-card-icon">🎵</div>
-      <div class="game-card-title">ALBUM</div>
-      <div class="game-card-desc">make weapons</div>
+    <div class="game-card" onclick="showScreen('poonmilk');initPoonMilk();">
+      <div class="game-card-icon">🥛</div>
+      <div class="game-card-title">POON MILK</div>
+      <div class="game-card-desc">build tycoon</div>
     </div>
     <div class="game-card" onclick="showScreen('kevinrun');startKevinRun();">
       <div class="game-card-icon">🏃</div>
@@ -221,32 +221,26 @@ body::before{content:'';position:fixed;top:0;left:0;width:100%;height:100%;backg
   </div>
 </div>
 
-<!-- ======== ALBUM CLICKER ======== -->
-<div id="albumclicker" class="screen game-screen">
+<!-- ======== POON MILK TYCOON ======== -->
+<div id="poonmilk" class="screen game-screen">
   <div class="game-topbar">
     <button class="back-btn" onclick="goHome();">BACK</button>
-    <span class="game-topbar-title">MAKE AN ALBUM</span>
+    <span class="game-topbar-title">POON MILK TYCOON</span>
   </div>
-  <div class="clicker-body">
-    <div class="save-status" id="save-status"></div>
-    <div class="beat-display">
-      <div class="beat-count" id="beat-count">0 BEATS</div>
-      <div class="beat-per-sec" id="beat-bps">0/SEC</div>
+  <div class="poon-body">
+    <div class="poon-save-status" id="poon-save-status"></div>
+    <div class="poon-money">
+      <div class="poon-money-pill" id="poon-money">$0.00</div>
+      <div class="poon-milk-display" id="poon-pms"></div>
     </div>
-    <div id="milestone-banner"></div>
-    <div class="click-zone" onclick="clickBeat(event)">
-      <div class="clicker-face"><img src="images/Kevin-Evans.png" alt="K"></div>
-      <div class="click-hint">TAP TO BEAT</div>
-    </div>
-    <div class="upgrades-title">UPGRADES</div>
-    <div class="upgrade-list" id="upgrade-list"></div>
+    <button class="poon-tap-btn" onclick="produceMilk();">PRODUCE MILK</button>
+    <div class="poon-units-title">UNITS</div>
+    <div class="poon-units" id="poon-units"></div>
+    <button class="poon-reset" onclick="resetPoonMilk();" title="Reset game progress">RESET</button>
   </div>
 </div>
 
-
-<div class="bottom-controls">
-  <button class="reset-btn" onclick="resetAlbumSave();" title="Reset album progress">RESET ALBUM</button>
-</div>
+<div class="bottom-controls"></div>
 
 <script>
 // ======================================================
@@ -763,55 +757,39 @@ document.getElementById('kevinrun-canvas').addEventListener('touchstart', e => {
 });
 
 // ======================================================
-//  ALBUM CLICKER
+//  POON MILK TYCOON
 // ======================================================
-let clickerState, clickerInterval;
+let poonState, poonInterval, poonAutoSaveInterval;
 
-const UPGRADES = [
-  {name:'MIC',cost:10,bps:0.5},
-  {name:'PRODUCER',cost:80,bps:3},
-  {name:'STUDIO',cost:400,bps:12},
-  {name:'RECORD DEAL',cost:2000,bps:50},
-  {name:'WORLD TOUR',cost:10000,bps:200},
-  {name:'J-DOG COLLAB',cost:50000,bps:1000},
+const POON_UNITS = [
+  {name:'Backyard Cow',baseCost:8,pms:0.5,mult:1.20},
+  {name:'Small Dairy Farm',baseCost:80,pms:4,mult:1.20}
 ];
 
-const MILESTONES = [
-  {at:50,msg:'✓ First beat recorded!'},
-  {at:200,msg:'✓ Single dropped!'},
-  {at:1000,msg:'✓ WEAPONS album started!'},
-  {at:5000,msg:'✓ Radio hit!'},
-  {at:20000,msg:'✓ WEAPONS went platinum!'},
-];
-
-function saveAlbumProgress() {
-  if (!clickerState) return;
-  localStorage.setItem('album_save', JSON.stringify({
-    beats: clickerState.beats,
-    bps: clickerState.bps,
-    owned: clickerState.owned,
-    milestone: clickerState.milestone
+function savePoonProgress() {
+  if (!poonState) return;
+  localStorage.setItem('poon_save', JSON.stringify({
+    money: poonState.money,
+    owned: poonState.owned
   }));
-  showSaveStatus();
+  showPoonSaveStatus();
 }
 
-function showSaveStatus() {
-  const el = document.getElementById('save-status');
+function showPoonSaveStatus() {
+  const el = document.getElementById('poon-save-status');
   el.textContent = '✓ SAVED';
   el.style.color = '#8fd68f';
   setTimeout(() => { el.textContent = ''; }, 2000);
 }
 
-function loadAlbumProgress() {
-  const saved = localStorage.getItem('album_save');
+function loadPoonProgress() {
+  const saved = localStorage.getItem('poon_save');
   if (saved) {
     try {
       const data = JSON.parse(saved);
       return {
-        beats: data.beats || 0,
-        bps: data.bps || 0,
-        owned: data.owned || {},
-        milestone: data.milestone || 0
+        money: data.money || 0,
+        owned: data.owned || {}
       };
     } catch(e) {
       return null;
@@ -820,106 +798,116 @@ function loadAlbumProgress() {
   return null;
 }
 
-function resetAlbumSave() {
-  if (confirm('Reset all album progress?')) {
-    localStorage.removeItem('album_save');
-    clickerState = null;
-    clearInterval(clickerInterval);
-    initClicker();
+function resetPoonMilk() {
+  if (confirm('Reset all Poon Milk Tycoon progress?')) {
+    localStorage.removeItem('poon_save');
+    poonState = null;
+    clearInterval(poonInterval);
+    clearInterval(poonAutoSaveInterval);
+    initPoonMilk();
   }
 }
 
-function initClicker() {
-  if (clickerState) return;
-
-  const saved = loadAlbumProgress();
-  if (saved) {
-    clickerState = saved;
-  } else {
-    clickerState = {beats:0,bps:0,owned:{},milestone:0};
-  }
-
-  renderUpgrades();
-  updateDisplay();
-
-  clearInterval(clickerInterval);
-  clickerInterval = setInterval(() => {
-    clickerState.beats += clickerState.bps / 10;
-    updateDisplay();
-    checkMilestones();
-    saveAlbumProgress();
-  }, 100);
+function fmtMoney(n) {
+  if (n >= 1e12) return '$' + (n/1e12).toFixed(1)+'T';
+  if (n >= 1e9) return '$' + (n/1e9).toFixed(1)+'B';
+  if (n >= 1e6) return '$' + (n/1e6).toFixed(1)+'M';
+  if (n >= 1e3) return '$' + (n/1e3).toFixed(1)+'K';
+  return '$' + n.toFixed(2);
 }
 
-function clickBeat(e) {
-  if (!clickerState) return;
-  clickerState.beats += 1;
-  updateDisplay();
-  checkMilestones();
-  saveAlbumProgress();
-
-  const div = document.createElement('div');
-  div.textContent = '+1';
-  div.style.cssText = `position:fixed;left:${e.clientX}px;top:${e.clientY}px;color:#ffff00;font-family:'Press Start 2P';font-size:14px;pointer-events:none;animation:floatup .7s forwards;text-shadow:1px 1px 0 #000;z-index:9000;`;
-  document.body.appendChild(div);
-  setTimeout(() => div.remove(), 700);
+function calculateUnitCost(unitIdx) {
+  const unit = POON_UNITS[unitIdx];
+  const owned = poonState.owned[unitIdx] || 0;
+  return unit.baseCost * Math.pow(unit.mult, owned);
 }
 
-function fmt(n) {
-  if (n >= 1e9) return (n/1e9).toFixed(1)+'B';
-  if (n >= 1e6) return (n/1e6).toFixed(1)+'M';
-  if (n >= 1e3) return (n/1e3).toFixed(1)+'K';
-  return Math.floor(n).toString();
-}
-
-function updateDisplay() {
-  document.getElementById('beat-count').textContent = fmt(clickerState.beats) + ' BEATS';
-  document.getElementById('beat-bps').textContent = clickerState.bps.toFixed(1) + '/SEC';
-  document.querySelectorAll('.upgrade-item').forEach(el => {
-    const idx = parseInt(el.dataset.idx);
-    el.classList.toggle('locked', clickerState.beats < UPGRADES[idx].cost);
+function calculateTotalPMS() {
+  let total = 0;
+  POON_UNITS.forEach((unit, idx) => {
+    const owned = poonState.owned[idx] || 0;
+    total += unit.pms * owned;
   });
+  return total;
 }
 
-function checkMilestones() {
-  while (clickerState.milestone < MILESTONES.length && clickerState.beats >= MILESTONES[clickerState.milestone].at) {
-    const b = document.getElementById('milestone-banner');
-    b.textContent = MILESTONES[clickerState.milestone].msg;
-    b.style.display = 'block';
-    setTimeout(() => b.style.display = 'none', 2500);
-    clickerState.milestone++;
+function updatePoonDisplay() {
+  document.getElementById('poon-money').textContent = fmtMoney(poonState.money);
+
+  const pms = calculateTotalPMS();
+  const pmsEl = document.getElementById('poon-pms');
+  if (pms > 0) {
+    pmsEl.textContent = `🥛 AUTO: ${pms.toFixed(1)}/sec`;
+  } else {
+    pmsEl.textContent = '';
   }
+
+  renderPoonUnits();
 }
 
-function buyUpgrade(idx) {
-  const up = UPGRADES[idx];
-  if (clickerState.beats < up.cost) return;
-  clickerState.beats -= up.cost;
-  clickerState.owned[idx] = (clickerState.owned[idx] || 0) + 1;
-  clickerState.bps += up.bps;
-  up.cost = Math.floor(up.cost * 1.6);
-  renderUpgrades();
-  updateDisplay();
-  saveAlbumProgress();
-}
-
-function renderUpgrades() {
-  const list = document.getElementById('upgrade-list');
+function renderPoonUnits() {
+  const list = document.getElementById('poon-units');
   list.innerHTML = '';
-  UPGRADES.forEach((up, idx) => {
-    const owned = (clickerState.owned[idx] || 0);
+  POON_UNITS.forEach((unit, idx) => {
+    const owned = poonState.owned[idx] || 0;
+    const cost = calculateUnitCost(idx);
+    const canAfford = poonState.money >= cost;
+
     const div = document.createElement('div');
-    div.className = 'upgrade-item' + (clickerState.beats < up.cost ? ' locked' : '');
-    div.dataset.idx = idx;
-    div.innerHTML = `<div><div class="upgrade-name">${up.name} ${owned>0?'('+owned+')':''}</div><div class="upgrade-info">+${up.bps} BPS</div></div><div class="upgrade-cost">⚡${fmt(up.cost)}</div>`;
-    div.onclick = () => buyUpgrade(idx);
+    div.className = 'poon-unit-card' + (canAfford ? '' : ' locked');
+    div.innerHTML = `
+      <div class="poon-unit-header">
+        <div class="poon-unit-name">${unit.name}</div>
+        <div class="poon-unit-owned">Own: ${owned}</div>
+      </div>
+      <div class="poon-unit-info">+${unit.pms} 🥛/sec</div>
+      <div class="poon-unit-info">Total: ${(unit.pms * owned).toFixed(1)} 🥛/sec</div>
+      <div class="poon-unit-cost">Cost: ${fmtMoney(cost)}</div>
+    `;
+    div.onclick = () => buyUnit(idx);
     list.appendChild(div);
   });
 }
 
-const style = document.createElement('style');
-style.textContent = '@keyframes floatup{from{opacity:1;transform:translateY(0);}to{opacity:0;transform:translateY(-60px);}}';
-document.head.appendChild(style);
+function buyUnit(idx) {
+  const cost = calculateUnitCost(idx);
+  if (poonState.money < cost) return;
+  poonState.money -= cost;
+  poonState.owned[idx] = (poonState.owned[idx] || 0) + 1;
+  updatePoonDisplay();
+  savePoonProgress();
+}
+
+function produceMilk() {
+  poonState.money += 0.25;
+  updatePoonDisplay();
+  savePoonProgress();
+}
+
+function initPoonMilk() {
+  if (poonState) return;
+
+  const saved = loadPoonProgress();
+  if (saved) {
+    poonState = saved;
+  } else {
+    poonState = {money:0,owned:{}};
+  }
+
+  updatePoonDisplay();
+
+  clearInterval(poonInterval);
+  poonInterval = setInterval(() => {
+    const pms = calculateTotalPMS();
+    poonState.money += pms / 10;
+    updatePoonDisplay();
+  }, 100);
+
+  clearInterval(poonAutoSaveInterval);
+  poonAutoSaveInterval = setInterval(() => {
+    savePoonProgress();
+  }, 5000);
+}
 </script>
 </body>
 </html>
